@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Control : MonoBehaviour, CharactorInput.IWarriorControlActions
 {
@@ -10,6 +11,13 @@ public class Control : MonoBehaviour, CharactorInput.IWarriorControlActions
     private Vector2 inputVector;
     private CharactorInput charactorInputActions;
     private Animator animator;
+
+    private int maxHP = 50;
+    private int currentHP = 50;
+    private int attackDemage = 10;
+
+    [SerializeField]
+    private Image hpBar;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -76,5 +84,10 @@ public class Control : MonoBehaviour, CharactorInput.IWarriorControlActions
         {
             animator.SetTrigger("attack");
         }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("collision name : " + collision.gameObject.name);
     }
 }
